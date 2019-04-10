@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 
 class Counter extends Component {
-
   styles = {
     fontSize: 10, //10px
     fontWeight: "bold"
