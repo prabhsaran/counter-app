@@ -6,15 +6,20 @@ class Counter extends Component {
     fontWeight: "bold"
   };
 
-  // constructor() {
-  //   super();
-  //   this.handleIncrement = this.handleIncrement.bind(this);
-  // }
+  constructor(props) {
+    super(props);
+    console.log('Counter - Constructor');
+    console.log('Counter Props', props);
+    console.log('\n');
+    //this.handleIncrement = this.handleIncrement.bind(this);
+  }
 
-  componentDidUpdate(prevProps, prevState) 
-  {
-    console.log('prevProps', prevProps);
-    console.log('prevState', prevState);
+  componentDidUpdate(prevProps, prevState) {
+    //console.log('prevProps', prevProps);
+    //console.log('prevState', prevState);
+  }
+
+  componentDidMount() {
   }
 
   renderTags() {
@@ -32,30 +37,38 @@ class Counter extends Component {
     let product = 1;
 
     return (
-      <div>
-        {/* <img src={ this.state.imageUrl } alt="" /> */}
-        {/* Styles expects an object */}
-        {this.props.children}
-        <span style={this.styles} className={this.getBadgeClasses()}>
-          {this.formatCount()}
-        </span>
-        <button
-          onClick={() => this.props.onIncrement(this.props.counter)}
-          className="btn btn-secondary btn-sm">
-          {" "}
-          Increment{" "}
-        </button>
 
-        <button
-          onClick={() => this.props.onDelete(this.props.counter.id)}
-          className="btn btn-danger btm-sm m-2">
-          Delete
-        </button>
+      <div className="row">
+        <div className="col-1">
+          <span style={this.styles} className={this.getBadgeClasses()}>
+            {this.formatCount()}
+          </span>
 
-        {/* {this.state.tags.length === 0 && "Please create a new tag"} */}
+        </div>
+        <div className="col">
+          <button
+            onClick={() => this.props.onIncrement(this.props.counter)}
+            className="btn btn-secondary btn-sm mr-2">
+            +
+            </button>
 
-        {/* {this.renderTags()} */}
+          <button
+            onClick={() => this.props.onDecrement(this.props.counter)}
+            className="btn btn-secondary btn-sm mr-2 "
+            disabled={this.isDisabled()}>
+            -
+            </button>
+
+          <button
+            onClick={() => this.props.onDelete(this.props.counter.id)}
+            className="btn btn-danger btn-sm">
+            Delete 
+            </button>
+
+        </div>
       </div>
+
+
     );
   }
 
@@ -63,6 +76,12 @@ class Counter extends Component {
     let classes = "badge m-2 badge-";
     classes += this.props.counter.value === 0 ? "warning" : "primary";
     return classes;
+  }
+
+  isDisabled() {
+    if (this.props.counter.value === 0) {
+      return true;
+    }
   }
 
   formatCount() {

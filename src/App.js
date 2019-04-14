@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import NavBar from "./components/Navbar";
 import "./App.css";
 import Counters from "./components/counters";
-import { CLIENT_RENEG_LIMIT } from "tls";
 
 class App extends Component {
   state = {
@@ -17,7 +16,6 @@ class App extends Component {
   constructor(props) {
     super(props);
     console.log('App - Constructor');
-    console.log(this.props);
   }
 
   //Ajax calls
@@ -26,7 +24,7 @@ class App extends Component {
   }
 
   componentDidUpdate() {
-    console.log('App - Update');
+    //console.log('App - Update');
   }
 
   handleIncrement = counter => {
@@ -37,6 +35,15 @@ class App extends Component {
     counters[index].value++;
     this.setState({ counters });
   };
+
+  handleDecrement = counter => {
+    const counters = [...this.state.counters];
+    const index = counters.indexOf(counter);
+    counters[index] = { ...counter };
+
+    counters[index].value--;
+    this.setState({ counters });
+  }
 
   handleDelete = counterId => {
     const counters = this.state.counters.filter(c => c.id !== counterId);
@@ -64,6 +71,7 @@ class App extends Component {
             counters={this.state.counters}
             onReset={this.handleReset}
             onIncrement={this.handleIncrement}
+            onDecrement={this.handleDecrement}
             onDelete={this.handleDelete}
           />
         </main>
