@@ -11,6 +11,12 @@ class Counter extends Component {
   //   this.handleIncrement = this.handleIncrement.bind(this);
   // }
 
+  componentDidUpdate(prevProps, prevState) 
+  {
+    console.log('prevProps', prevProps);
+    console.log('prevState', prevState);
+  }
+
   renderTags() {
     if (this.state.tags.length === 0) return <p>There are no tags!</p>;
     return (

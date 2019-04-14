@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import NavBar from "./components/Navbar";
 import "./App.css";
 import Counters from "./components/counters";
+import { CLIENT_RENEG_LIMIT } from "tls";
 
 class App extends Component {
   state = {
@@ -22,6 +23,10 @@ class App extends Component {
   //Ajax calls
   componentDidMount() {
     console.log('App - Mounted');
+  }
+
+  componentDidUpdate() {
+    console.log('App - Update');
   }
 
   handleIncrement = counter => {
@@ -48,6 +53,7 @@ class App extends Component {
   };
 
   render() {
+    console.log("App - Render");
     return (
       <React.Fragment>
         <NavBar
